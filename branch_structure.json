@@ -1,0 +1,24 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "afsar",
+    "main",
+    "origin",
+    "rahat",
+    "tamzid"
+  ],
+  "parent": {
+    "afsar": "main",
+    "main": null,
+    "origin": "main",
+    "rahat": "main",
+    "tamzid": "main"
+  },
+  "order": [
+    "main",
+    "afsar",
+    "origin",
+    "rahat",
+    "tamzid"
+  ]
+}
