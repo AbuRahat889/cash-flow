@@ -21,8 +21,9 @@ import {
 } from "lucide-react"
 
 import logo from '@/assets/logo.svg'
+import Image from "next/image"
 
-export default function Sidebar() {
+export default function Navbar() {
   const pathname = usePathname()
 
   const navItems = [
@@ -41,31 +42,8 @@ export default function Sidebar() {
 
   return (
     <aside className="w-64 bg-purple-800 text-white h-screen flex flex-col">
-      <div className="p-5 border-b border-purple-700">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-              <path
-                d="M12 2L4 6V12C4 15.31 7.58 19.8 12 22C16.42 19.8 20 15.31 20 12V6L12 2Z"
-                fill="white"
-                opacity="0.2"
-              />
-              <path d="M12 4L6 7V12C6 14.21 8.79 17.8 12 19.5C15.21 17.8 18 14.21 18 12V7L12 4Z" fill="white" />
-              <path
-                d="M9 10.5L11 12.5L15 8.5"
-                stroke="purple"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <div>
-            <h1 className="text-xl font-bold">CASHFLOW</h1>
-            <p className="text-xs text-purple-200">Personal Finance</p>
-          </div>
-        </div>
-      </div>
+
+      <Image src={logo} alt="logo" width={500} height={500} />
 
       <nav className="flex-1 overflow-y-auto py-4">
         <ul className="space-y-1">
