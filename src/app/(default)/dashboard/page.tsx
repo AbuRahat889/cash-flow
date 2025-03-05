@@ -27,6 +27,45 @@ export default function page() {
         <Image src={increment} alt="logo" width={500} height={500} className='h-48 w-48' />
       </div>
 
+      {/* table */}
+
+      <div className="w-full mx-auto p-6">
+        <div className="rounded-lg overflow-hidden bg-gradient-to-r from-purple-500 to-purple-600 shadow-md">
+          {/* Header section */}
+          <div className="px-6 py-4 flex justify-between items-center">
+            <h2 className="text-white text-xl font-medium">Transactions</h2>
+            <div className="flex space-x-2">
+              <button className="bg-white/30 text-white px-4 py-1 rounded-full text-sm">Newest</button>
+              <button className="bg-white/30 text-white px-4 py-1 rounded-full text-sm">Oldest</button>
+            </div>
+          </div>
+
+          {/* Table */}
+          <div className="w-full">
+            {/* Table header */}
+            <div className="grid grid-cols-4 px-6 py-3 text-white border-t border-white/20">
+              <div className="font-medium">Name</div>
+              <div className="font-medium">Status</div>
+              <div className="font-medium">Date</div>
+              <div className="font-medium text-right">Amount</div>
+            </div>
+
+            {/* Table row */}
+            <div className="grid grid-cols-4 px-6 py-4 text-white border-t border-white/20">
+              <div>Rahat</div>
+              <div>
+                <span className="flex items-center">
+                  <span className="mr-1">🍔</span> Food
+                </span>
+              </div>
+              <div>01/06/2023</div>
+              <div className="text-right">500</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
   )
 }
