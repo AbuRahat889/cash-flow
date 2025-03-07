@@ -35,7 +35,7 @@ export default function Navbar() {
     { name: "Goal", href: "/goal", icon: Target },
     { name: "Report", href: "/report", icon: FileText },
     { name: "Analytics", href: "/analytics", icon: BarChart3 },
-    { name: "Sign Up", href: "/signup", icon: UserPlus },
+    { name: "Sign Up", href: "/sign-up", icon: UserPlus },
     { name: "Suggestion", href: "/suggestion", icon: MessageSquare },
     { name: "About Us", href: "/about", icon: Info },
   ]
@@ -53,9 +53,8 @@ export default function Navbar() {
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className={`flex items-center px-5 py-3 text-sm ${
-                    isActive ? "bg-purple-900 border-l-4 border-white" : "hover:bg-purple-700"
-                  }`}
+                  className={`flex items-center px-5 py-3 text-sm ${isActive ? "bg-purple-900 border-l-4 border-white" : "hover:bg-purple-700"
+                    }`}
                 >
                   <item.icon className="w-5 h-5 mr-3" />
                   {item.name}
