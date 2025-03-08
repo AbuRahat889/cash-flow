@@ -20,7 +20,7 @@ export default function page() {
 
       <div className='flex justify-between items-center  bg-[#5534A5] p-10 rounded-lg mt-10'>
         <div className=''>
-        <h1 className='text-6xl font-bold leading-normal'>Welcome Rahat!</h1>
+        <h1 className='text-6xl font-bold leading-normal'>Welcome Tamzid!</h1>
         <h1 className='text-2xl font-semibold leading-normal'>CashFlow will <span className='text-[#FFF800]'>save you money</span></h1>
         <p className='text-xl font-normal leading-normal mt-7 '>Money management is the art of balancing your desires with your means, and finding harmony in both.</p> 
 
