@@ -3,11 +3,13 @@
 
 import { Divider } from "antd"
 import { Wallet } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
-import { FaFacebookF } from "react-icons/fa6"
+import { FaArrowLeft, FaFacebookF } from "react-icons/fa6"
 import { FcGoogle } from "react-icons/fc"
 
 export default function Page() {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -20,9 +22,10 @@ export default function Page() {
   }
 
   return (
-    <div className="w-full  p-4 bg-gradient-to-br from-purple-500 to-purple-700">
+    <div className="w-full min-h-screen flex items-center justify-center  p-4 bg-gradient-to-br from-purple-500 to-purple-700">
 
-      <div className=' bg-[#5534A5] py-12 px-32 rounded-lg mt-10'>
+      <div className='max-w-3xl  bg-[#5534A5] py-12 px-32 rounded-lg mt-10'>
+        <h1 onClick={()=>router.back()} className="text-white flex items-center gap-3 cursor-pointer"> <FaArrowLeft /> Back</h1>
 
         <h1 className="text-2xl text-white font-semibold text-center mb-8">
           <span className="border-b-2 pb-1">Create Your Account</span>
