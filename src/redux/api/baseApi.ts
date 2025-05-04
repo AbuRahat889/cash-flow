@@ -4,10 +4,8 @@ import { RootState } from "../store/store";
 
 // Utility function to handle the base API URL
 const baseApiHandler = () => {
-  // const apiUrl = "http://10.0.10.66:5198/api/v1";
-  const apiUrl = "https://syoung-zeta.vercel.app/api/v1";
-  // const apiUrl = "http://localhost:5000/api/v1"
-  //   process.env.API_BASE_URL || "http://104.236.194.254:5198/api/v1";
+  const apiUrl = "http://localhost:5000/api";
+
   return apiUrl;
 };
 

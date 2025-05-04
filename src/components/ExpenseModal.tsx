@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
-import { CalendarClock, ChevronDown, MessageSquare, Wallet } from "lucide-react"
+import { usePostExpencesMutation } from "@/redux/api/expence"
+import { ChevronDown, MessageSquare, Wallet } from "lucide-react"
 import { useForm } from "react-hook-form"
+import Swal from "sweetalert2"
 
 export default function ExpenseMoney() {
     const {
@@ -11,9 +13,28 @@ export default function ExpenseMoney() {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data: any) => {
-        console.log(data)
+    const [expenceFN, { isLoading }] = usePostExpencesMutation()
+
+    const onSubmit = async (data: any) => {
+        console.log(data, 'this is data from ex')
+
+        try {
+            const res = await expenceFN(data)
+            console.log(res)
+            Swal.fire({
+                title: "Success!",
+                text: "You add your expences!",
+                icon: "success"
+            });
+
+
+        } catch (error) {
+            console.log(error)
+        }
+
         // Handle form submission
+
+
     }
 
     return (
@@ -47,7 +68,7 @@ export default function ExpenseMoney() {
                                 className="w-full h-12 px-4 rounded-lg text-gray-800 placeholder-gray-400 bg-white focus:outline-none focus:ring-2 focus:ring-purple-400 appearance-none"
                             >
                                 <option value="">Expense Categories</option>
-                                <option value="salary">Rent</option>
+                                <option value="rent">Rent</option>
                                 <option value="investment">Investment</option>
                                 {/* <option value="savings">Savings</option> */}
                                 <option value="other">Other</option>
@@ -61,13 +82,13 @@ export default function ExpenseMoney() {
                         {/* DateTime Input */}
                         <div className="relative">
                             <input
-                                {...register("dateTime")}
+                                {...register("date")}
                                 type="datetime-local"
                                 placeholder="Date and Time"
                                 className="w-full h-12 px-4 rounded-lg text-gray-800 placeholder-gray-400 bg-white focus:outline-none focus:ring-2 focus:ring-purple-400"
                             />
                             <div className="absolute right-3 top-1/2 -translate-y-1/2 text-purple-500">
-                                <CalendarClock size={20} />
+                                {/* <CalendarClock size={20} /> */}
                             </div>
                             {errors.dateTime && <span className="text-red-200 text-sm mt-1">{String(errors.dateTime.message)}</span>}
                         </div>
@@ -75,7 +96,7 @@ export default function ExpenseMoney() {
                         {/* Message Input */}
                         <div className="relative">
                             <input
-                                {...register("message")}
+                                {...register("description")}
                                 type="text"
                                 placeholder="Deposit Message"
                                 className="w-full h-12 px-4 rounded-lg text-gray-800 placeholder-gray-400 bg-white focus:outline-none focus:ring-2 focus:ring-purple-400"
@@ -92,7 +113,10 @@ export default function ExpenseMoney() {
                             type="submit"
                             className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            Add Expense
+                            {
+                                isLoading ? "Loading..." : "Add Expense"
+                            }
+
                         </button>
                     </div>
                 </form>
