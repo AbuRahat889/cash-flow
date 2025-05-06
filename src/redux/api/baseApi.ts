@@ -4,7 +4,7 @@ import { RootState } from "../store/store";
 
 // Utility function to handle the base API URL
 const baseApiHandler = () => {
-  const apiUrl = "http://localhost:5000/api";
+  const apiUrl = "http://localhost:5555/api";
 
   return apiUrl;
 };
@@ -23,5 +23,5 @@ export const baseApi = createApi({
     },
   }),
   endpoints: () => ({}),
-  tagTypes: ["contact", "review"],
+  tagTypes: ["contact", "review", "auth"],
 });

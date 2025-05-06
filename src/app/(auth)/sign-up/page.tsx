@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
+import { useCreateuserMutation } from "@/redux/api/auth"
 import { Divider } from "antd"
 import { Wallet } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -16,7 +17,25 @@ export default function Page() {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data: any) => {
+
+
+  const [createUserFN, { isLoading }] = useCreateuserMutation()
+  const onSubmit = async (data: any) => {
+
+    try {
+      const res = await createUserFN({
+        username: data.username,
+        email: data.email,
+        password: data.password,
+        role: "user",
+        authProvider: "manual"
+      })
+      console.log(res)
+      router.push("/auth/login")
+    } catch (error) {
+      console.log(error)
+
+    }
     console.log(data)
     // Handle form submission
   }
@@ -25,19 +44,19 @@ export default function Page() {
     <div className="w-full min-h-screen flex items-center justify-center  p-4 bg-gradient-to-br from-purple-500 to-purple-700">
 
       <div className='max-w-3xl  bg-[#5534A5] py-12 px-32 rounded-lg mt-10'>
-        <h1 onClick={()=>router.back()} className="text-white flex items-center gap-3 cursor-pointer"> <FaArrowLeft /> Back</h1>
+        <h1 onClick={() => router.back()} className="text-white flex items-center gap-3 cursor-pointer"> <FaArrowLeft /> Back</h1>
 
         <h1 className="text-2xl text-white font-semibold text-center mb-8">
           <span className="border-b-2 pb-1">Create Your Account</span>
         </h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1  gap-8">
             {/* Amount Input */}
             <div className="relative">
               <input
-                {...register("firstName", { required: "First Name is required" })}
+                {...register("username", { required: "First Name is required" })}
                 type="text"
-                placeholder="First Name"
+                placeholder=" Name"
                 className="w-full h-12 px-4 rounded-lg text-gray-800 placeholder-gray-400 bg-white focus:outline-none focus:ring-2 focus:ring-purple-400"
               />
               <div className="absolute right-3 top-1/2 -translate-y-1/2 text-purple-500">
@@ -46,18 +65,6 @@ export default function Page() {
               {errors.amount && typeof errors.amount.message === 'string' && <span className="text-red-200 text-sm mt-1">{errors.amount.message}</span>}
             </div>
 
-            <div className="relative">
-              <input
-                {...register("lastName", { required: "Last Name is required" })}
-                type="text"
-                placeholder="Last Name"
-                className="w-full h-12 px-4 rounded-lg text-gray-800 placeholder-gray-400 bg-white focus:outline-none focus:ring-2 focus:ring-purple-400"
-              />
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-purple-500">
-                <Wallet size={20} />
-              </div>
-              {errors.amount && typeof errors.amount.message === 'string' && <span className="text-red-200 text-sm mt-1">{errors.amount.message}</span>}
-            </div>
 
             {/* Amount Input */}
             <div className="relative">
@@ -98,7 +105,8 @@ export default function Page() {
               type="submit"
               className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Sing Up
+              {isLoading ? "Loading..." : "Sing Up"}
+
             </button>
           </div>
         </form>

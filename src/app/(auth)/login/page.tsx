@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
+import { useLoginuserMutation } from "@/redux/api/auth"
 import { Divider } from "antd"
 import { Wallet } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -16,7 +17,12 @@ export default function Page() {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data: any) => {
+
+    const [loginUserFN] = useLoginuserMutation()
+    const onSubmit = async (data: any) => {
+        const res = await loginUserFN({ username: data.username, password: data.password })
+        router.push("/")
+        console.log(res)
         console.log(data)
         // Handle form submission
     }
@@ -31,13 +37,13 @@ export default function Page() {
                     <span className="border-b-2 pb-1">Log in into Your Account</span>
                 </h1>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 gap-8">
                         {/* Amount Input */}
                         <div className="relative">
                             <input
-                                {...register("firstName", { required: "First Name is required" })}
+                                {...register("username", { required: "First Name is required" })}
                                 type="text"
-                                placeholder="First Name"
+                                placeholder="Name"
                                 className="w-full h-12 px-4 rounded-lg text-gray-800 placeholder-gray-400 bg-white focus:outline-none focus:ring-2 focus:ring-purple-400"
                             />
                             <div className="absolute right-3 top-1/2 -translate-y-1/2 text-purple-500">
@@ -46,7 +52,7 @@ export default function Page() {
                             {errors.amount && typeof errors.amount.message === 'string' && <span className="text-red-200 text-sm mt-1">{errors.amount.message}</span>}
                         </div>
 
-                        <div className="relative">
+                        {/* <div className="relative">
                             <input
                                 {...register("lastName", { required: "Last Name is required" })}
                                 type="text"
@@ -57,10 +63,10 @@ export default function Page() {
                                 <Wallet size={20} />
                             </div>
                             {errors.amount && typeof errors.amount.message === 'string' && <span className="text-red-200 text-sm mt-1">{errors.amount.message}</span>}
-                        </div>
+                        </div> */}
 
                         {/* Amount Input */}
-                        <div className="relative">
+                        {/* <div className="relative">
                             <input
                                 {...register("email", { required: "Email is required" })}
                                 type="email"
@@ -72,7 +78,7 @@ export default function Page() {
                                 <Wallet size={20} />
                             </div>
                             {errors.amount && typeof errors.amount.message === 'string' && <span className="text-red-200 text-sm mt-1">{errors.amount.message}</span>}
-                        </div>
+                        </div> */}
 
                         <div className="relative">
                             <input
