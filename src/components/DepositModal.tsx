@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
-import { CalendarClock, ChevronDown, MessageSquare, Wallet } from "lucide-react"
+import { usePostDepositeMutation } from "@/redux/api/deposit"
+import { ChevronDown, MessageSquare, Wallet } from "lucide-react"
 import { useForm } from "react-hook-form"
 
 export default function MoneyDepositForm() {
@@ -11,8 +12,19 @@ export default function MoneyDepositForm() {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data: any) => {
+
+
+    const [depositFN] = usePostDepositeMutation()
+    const onSubmit = async (data: any) => {
         console.log(data)
+
+        try {
+            const res = await depositFN({ name: "user", status: "pending", date: new Date(), ...data }).unwrap()
+            console.log(res)
+        } catch (error) {
+            console.log(error)
+
+        }
         // Handle form submission
     }
 
@@ -67,7 +79,7 @@ export default function MoneyDepositForm() {
                                 className="w-full h-12 px-4 rounded-lg text-gray-800 placeholder-gray-400 bg-white focus:outline-none focus:ring-2 focus:ring-purple-400"
                             />
                             <div className="absolute right-3 top-1/2 -translate-y-1/2 text-purple-500">
-                                <CalendarClock size={20} />
+                                {/* <CalendarClock size={20} /> */}
                             </div>
                             {errors.dateTime && <span className="text-red-200 text-sm mt-1">{String(errors.dateTime.message)}</span>}
                         </div>

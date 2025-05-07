@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 'use client'
 import Header from '@/components/Header'
 import React, { useState } from 'react'
 import { Modal } from 'antd';
 import MoneyDepositForm from '@/components/DepositModal';
+import { useGetExpencesQuery } from '@/redux/api/expence';
 
 export default function Page() {
     const [open, setOpen] = useState(false);
@@ -27,6 +29,11 @@ export default function Page() {
         console.log('Clicked cancel button');
         setOpen(false);
     };
+
+    const { data } = useGetExpencesQuery('')
+
+    console.log(data)
+    // { name, status, date, amount, category, message }
 
     return (
         <div className='bg-[#A85CF9] w-screen p-10 container mx-auto'>
@@ -57,16 +64,21 @@ export default function Page() {
                         </div>
 
                         {/* Table row */}
-                        <div className="grid grid-cols-4 px-6 py-4 text-white border-t border-white/20">
-                            <div>Rahat</div>
-                            <div>
-                                <span className="flex items-center">
-                                    any
-                                </span>
-                            </div>
-                            <div>01/06/2023</div>
-                            <div className="text-right">500</div>
-                        </div>
+                        {
+                            data?.map((item: any, index: number) => (
+                                <div key={index} className="grid grid-cols-4 px-6 py-4 text-white border-t border-white/20">
+                                    <div>{item?.name}</div>
+                                    <div>
+                                        <span className="flex items-center">
+                                            {item.status}
+                                        </span>
+                                    </div>
+                                    <div>{item?.date}</div>
+                                    <div className="text-right">{item?.amount}</div>
+                                </div>
+                            ))
+                        }
+
                     </div>
                 </div>
             </div>

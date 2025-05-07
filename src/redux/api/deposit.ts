@@ -2,12 +2,12 @@ import { baseApi } from "./baseApi";
 
 // /* eslint-disable @typescript-eslint/no-explicit-any */
 
-const ExpencesApi = baseApi.injectEndpoints({
+const DepositApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     //constact the admin
-    postExpences: build.mutation({
+    postDeposite: build.mutation({
       query: (data) => ({
-        url: `/expenses`,
+        url: `/deposits`,
         method: "POST",
         body: data,
       }),
@@ -15,9 +15,9 @@ const ExpencesApi = baseApi.injectEndpoints({
     }),
 
     //constact the admin
-    getExpences: build.query({
+    getDeposite: build.query({
       query: () => ({
-        url: `/expenses`,
+        url: `/deposits`,
         method: "GET",
       }),
       providesTags: ["contact"],
@@ -25,5 +25,5 @@ const ExpencesApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { usePostExpencesMutation, useGetExpencesQuery } = ExpencesApi;
-export default ExpencesApi;
+export const { usePostDepositeMutation, useGetDepositeQuery } = DepositApi;
+export default DepositApi;

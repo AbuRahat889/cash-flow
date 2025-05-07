@@ -4,6 +4,7 @@ import Header from '@/components/Header'
 import React, { useState } from 'react'
 import { Modal } from 'antd';
 import ExpenseMoney from '@/components/ExpenseModal';
+import { useGetExpencesQuery } from '@/redux/api/expence';
 
 export default function Page() {
     const [open, setOpen] = useState(false);
@@ -27,6 +28,9 @@ export default function Page() {
         console.log('Clicked cancel button');
         setOpen(false);
     };
+
+    const { data } = useGetExpencesQuery('')
+    console.log(data, 'data from expense page')
 
     return (
         <div className='bg-[#A85CF9] w-screen p-10 container mx-auto'>
