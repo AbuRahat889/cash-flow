@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 'use client'
 import Header from '@/components/Header'
 import React, { useState } from 'react'
 import { Modal } from 'antd';
 import BudgetsMoney from '@/components/BudgetsModal';
+import { useGetBudgetsQuery } from '@/redux/api/budgets';
 
 export default function Page() {
     const [open, setOpen] = useState(false);
@@ -27,6 +29,8 @@ export default function Page() {
         console.log('Clicked cancel button');
         setOpen(false);
     };
+
+    const { data } = useGetBudgetsQuery('')
 
     return (
         <div className='bg-[#A85CF9] w-screen p-10 container mx-auto'>
@@ -59,16 +63,20 @@ export default function Page() {
                         </div>
 
                         {/* Table row */}
-                        <div className="grid grid-cols-6 px-6 py-4 text-white border-t border-white/20">
-                            <div>Rahat</div>
-                            <div>
-                                luxury
-                            </div>
-                            <div>Buy a car</div>
-                            <div>01/06/2023</div>
-                            <div>01/06/2023</div>
-                            <div className="text-right">500</div>
-                        </div>
+                        {
+                            data?.map((item: any) => (
+                                <div key={item._id} className="grid grid-cols-6 px-6 py-4 text-white border-t border-white/20">
+                                    <div>{item.budgetsName}</div>
+                                    <div>{item.description}</div>
+                                    <div>{item.category}</div>
+                                    <div>{item.startDate}</div>
+                                    <div>{item.endDate}</div>
+                                    <div className="text-right">{item.amount}</div>
+                                </div>
+                            ))
+
+                        }
+
                     </div>
                 </div>
             </div>

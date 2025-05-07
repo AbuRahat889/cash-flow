@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 'use client'
 import Header from '@/components/Header'
@@ -28,6 +29,24 @@ export default function Page() {
         console.log('Clicked cancel button');
         setOpen(false);
     };
+
+
+    // amount: {
+    //     type: Number,
+    //         required: true
+    // },
+    // description: {
+    //     type: String,
+    //         required: true
+    // },
+    // category: {
+    //     type: String,
+    //         required: true
+    // },
+    // date: {
+    //     type: Date,
+    // default: Date.now
+    // }
 
     const { data } = useGetExpencesQuery('')
     console.log(data, 'data from expense page')
@@ -61,16 +80,21 @@ export default function Page() {
                         </div>
 
                         {/* Table row */}
-                        <div className="grid grid-cols-4 px-6 py-4 text-white border-t border-white/20">
-                            <div>Rahat</div>
-                            <div>
-                                <span className="flex items-center">
-                                    Rent
-                                </span>
-                            </div>
-                            <div>01/06/2023</div>
-                            <div className="text-right">5000</div>
-                        </div>
+                        {
+                            data?.map((item: any) => (
+                                <div key={item._id} className="grid grid-cols-4 px-6 py-4 text-white border-t border-white/20">
+                                    <div>{item.name}</div>
+                                    <div>
+                                        <span className="flex items-center">
+                                            {item.description}
+                                        </span>
+                                    </div>
+                                    <div>{item.date}</div>
+                                    <div className="text-right">{item.amount}</div>
+                                </div>
+                            ))
+                        }
+
                     </div>
                 </div>
             </div>

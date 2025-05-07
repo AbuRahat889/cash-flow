@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
+import { usePostBudgetsMutation } from "@/redux/api/budgets"
 import { CalendarClock, ChevronDown, Wallet } from "lucide-react"
 import { useForm } from "react-hook-form"
 
@@ -11,9 +12,15 @@ export default function BudgetsMoney() {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data: any) => {
+    const [postBudgets] = usePostBudgetsMutation()
+    const onSubmit = async (data: any) => {
+
+        const res = await postBudgets(data)
+        console.log(res)
         console.log(data)
         // Handle form submission
+
+
     }
 
     return (
