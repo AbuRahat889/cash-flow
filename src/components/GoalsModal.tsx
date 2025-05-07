@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
+import { usePostGoalsMutation } from "@/redux/api/gole"
 import { CalendarClock, ChevronDown, Wallet } from "lucide-react"
 import { useForm } from "react-hook-form"
 
@@ -11,8 +12,38 @@ export default function GoalMoney() {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data: any) => {
-        console.log(data)
+
+    // goalName: {
+    //     type: String,
+    //         required: true
+    // },
+    // targetAmount: {
+    //     type: Number,
+    //         required: true
+    // },
+    // alreadySaved: {
+    //     type: Number,
+    // default: 0
+    // },
+    // priority: {
+    //     type: String,
+    // enum: ['High', 'Medium', 'Low'],
+    //         required: true
+    // },
+    // desiredDate: {
+    //     type: Date,
+    //         required: true
+    // },
+    // category: {
+    //     type: String,
+    //         required: true
+    // }
+
+    const [postgoalFN] = usePostGoalsMutation()
+    const onSubmit = async (data: any) => {
+
+        const res = await postgoalFN(data)
+        console.log(res)
         // Handle form submission
     }
 

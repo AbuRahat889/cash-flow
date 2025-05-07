@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 'use client'
 import Header from '@/components/Header'
 import React, { useState } from 'react'
 import { Modal } from 'antd';
 import GoalMoney from '@/components/GoalsModal';
+import { useGetExpencesQuery } from '@/redux/api/expence';
 
 export default function Page() {
     const [open, setOpen] = useState(false);
@@ -27,6 +29,8 @@ export default function Page() {
         console.log('Clicked cancel button');
         setOpen(false);
     };
+
+    const { data } = useGetExpencesQuery('')
 
     return (
         <div className='bg-[#A85CF9] w-screen p-10 container mx-auto'>
@@ -60,17 +64,23 @@ export default function Page() {
                         </div>
 
                         {/* Table row */}
-                        <div className="grid grid-cols-7 px-6 py-4 text-white border-t border-white/20">
-                            <div>Buy a Car</div>
-                            <div className='line-clamp-1'>
-                                I want to buy a car
-                            </div>
-                            <div>Career goals</div>
-                            <div>01/06/2030</div>
-                            <div>top</div>
-                            <div>1cr</div>
-                            <div className="text-right">1taka</div>
-                        </div>
+                        {
+                            data?.map((item: any) => (
+                                <div key={item._id} className="grid grid-cols-7 px-6 py-4 text-white border-t border-white/20">
+                                    <div>{item.name}</div>
+                                    <div className='line-clamp-1'>
+                                        {item.description}
+                                    </div>
+                                    <div>{item.category}</div>
+                                    <div>{item.date}</div>
+                                    <div>{item.priority}</div>
+                                    <div>{item.amount}</div>
+                                    <div className="text-right">{item.alreadyAmount}</div>
+                                </div>
+                            ))  
+
+                        }
+                     
                     </div>
                 </div>
             </div>
