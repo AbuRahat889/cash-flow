@@ -4,7 +4,7 @@ import { RootState } from "../store/store";
 
 // Utility function to handle the base API URL
 const baseApiHandler = () => {
-  const apiUrl = "http://localhost:5555/api";
+  const apiUrl = "https://cashflowbackend-2.onrender.com/api/";
 
   return apiUrl;
 };
