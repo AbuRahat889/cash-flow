@@ -31,6 +31,7 @@ export default function Page() {
     };
 
     const { data } = useGetExpencesQuery('')
+    console.log(data, 'goal data')
 
     return (
         <div className='bg-[#A85CF9] w-screen p-10 container mx-auto'>
@@ -72,15 +73,19 @@ export default function Page() {
                                         {item.description}
                                     </div>
                                     <div>{item.category}</div>
-                                    <div>{item.date}</div>
+                                    <div>  {new Date(item.date).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "2-digit",
+                                        year: "numeric",
+                                    })}</div>
                                     <div>{item.priority}</div>
                                     <div>{item.amount}</div>
                                     <div className="text-right">{item.alreadyAmount}</div>
                                 </div>
-                            ))  
+                            ))
 
                         }
-                     
+
                     </div>
                 </div>
             </div>

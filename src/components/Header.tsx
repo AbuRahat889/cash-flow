@@ -6,6 +6,8 @@ import profile from '@/assets/profile.png'
 
 
 export default function Header() {
+    const user = localStorage.getItem('user')
+
     return (
         <div className='container mx-auto'>
 
@@ -18,7 +20,7 @@ export default function Header() {
                     <CiBellOn className='h-12 w-12' />
 
                     <div className='flex items-center justify-between gap-5'>
-                        <h1 className='text-xl font-bold text-white'>Abu Rahat Shaum</h1>
+                        <h1 className='text-xl font-bold text-white'>{user}</h1>
                         <Image src={profile} alt="logo" width={500} height={500} className='h-16 w-16 rounded-full ' />
                     </div>
 

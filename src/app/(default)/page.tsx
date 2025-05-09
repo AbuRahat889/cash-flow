@@ -1,4 +1,4 @@
-
+'use client'
 
 import image from '@/assets/cashflowimage.png'
 import Image from 'next/image';
@@ -6,6 +6,8 @@ import Link from 'next/link';
 
 
 export default function HeroSection() {
+
+
   return (
     <section className="min-h-screen flex items-center justify-between px-8 py-16 bg-white">
       {/* Left Section */}

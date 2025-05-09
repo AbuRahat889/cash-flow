@@ -49,7 +49,7 @@ export default function Page() {
     // }
 
     const { data } = useGetExpencesQuery('')
-    console.log(data, 'data from expense page')
+    console.log(data, 'ex data')
 
     return (
         <div className='bg-[#A85CF9] w-screen p-10 container mx-auto'>
@@ -72,7 +72,8 @@ export default function Page() {
                     {/* Table */}
                     <div className="w-full">
                         {/* Table header */}
-                        <div className="grid grid-cols-4 px-6 py-3 text-white border-t border-white/20">
+                        <div className="grid grid-cols-5 px-6 py-3 text-white border-t border-white/20">
+                            <div className="font-medium">#</div>
                             <div className="font-medium">Name</div>
                             <div className="font-medium">Discription</div>
                             <div className="font-medium">Date</div>
@@ -81,15 +82,20 @@ export default function Page() {
 
                         {/* Table row */}
                         {
-                            data?.map((item: any) => (
-                                <div key={item._id} className="grid grid-cols-4 px-6 py-4 text-white border-t border-white/20">
-                                    <div>{item.name}</div>
+                            data?.map((item: any, index: number) => (
+                                <div key={item._id} className="grid grid-cols-5 px-6 py-4 text-white border-t border-white/20">
+                                    <div>{index + 1}</div>
+                                    <div>{item.category}</div>
                                     <div>
-                                        <span className="flex items-center">
+                                        <span className="flex items-center line-clamp-1">
                                             {item.description}
                                         </span>
                                     </div>
-                                    <div>{item.date}</div>
+                                    <div>  {new Date(item.date).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "2-digit",
+                                        year: "numeric",
+                                    })}</div>
                                     <div className="text-right">{item.amount}</div>
                                 </div>
                             ))

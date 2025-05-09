@@ -31,6 +31,8 @@ export default function Page() {
     };
 
     const { data } = useGetBudgetsQuery('')
+    console.log(data, 'data')
+    // const { data, isLoading, isError } = useGetBudgetsQuery('')
 
     return (
         <div className='bg-[#A85CF9] w-screen p-10 container mx-auto'>
@@ -53,7 +55,8 @@ export default function Page() {
                     {/* Table */}
                     <div className="w-full">
                         {/* Table header */}
-                        <div className="grid grid-cols-6 px-6 py-3 text-white border-t border-white/20">
+                        <div className="grid grid-cols-7 px-6 py-3 text-white border-t border-white/20">
+                            <div>#</div>
                             <div className="font-medium">Budgets Name</div>
                             <div className="font-medium">Discription</div>
                             <div className="font-medium">Budgets category</div>
@@ -64,13 +67,23 @@ export default function Page() {
 
                         {/* Table row */}
                         {
-                            data?.map((item: any) => (
-                                <div key={item._id} className="grid grid-cols-6 px-6 py-4 text-white border-t border-white/20">
-                                    <div>{item.budgetsName}</div>
-                                    <div>{item.description}</div>
-                                    <div>{item.category}</div>
-                                    <div>{item.startDate}</div>
-                                    <div>{item.endDate}</div>
+                            data?.map((item: any, index: number) => (
+                                <div key={item._id} className="grid grid-cols-7 px-6 py-4 text-white border-t border-white/20">
+                                    <div>{index + 1}</div>
+                                    <div>{item.budgetName}</div>
+                                    <div className='line-clamp-1'>{item.message}</div>
+                                    <div>{item.categories
+                                    [0]}</div>
+                                    <div>  {new Date(item.startDate).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "2-digit",
+                                        year: "numeric",
+                                    })}</div>
+                                    <div>  {new Date(item.endDate).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "2-digit",
+                                        year: "numeric",
+                                    })}</div>
                                     <div className="text-right">{item.amount}</div>
                                 </div>
                             ))

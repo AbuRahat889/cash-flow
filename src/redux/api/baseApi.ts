@@ -1,6 +1,5 @@
 // src/api/baseApi.ts
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { RootState } from "../store/store";
 
 // Utility function to handle the base API URL
 const baseApiHandler = () => {
@@ -8,16 +7,22 @@ const baseApiHandler = () => {
 
   return apiUrl;
 };
-
 // Define the base API using RTK Query
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: baseApiHandler(),
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
+    prepareHeaders: (headers) => {
+      let token = "";
+
+      if (typeof window !== "undefined") {
+        token = localStorage.getItem("token") || "";
+      }
+
+      console.log(token, "this is the token from baseApi");
+
       if (token) {
-        headers.set("Authorization", `${token}`);
+        headers.set("Authorization", `Bearar ${token}`);
       }
       return headers;
     },

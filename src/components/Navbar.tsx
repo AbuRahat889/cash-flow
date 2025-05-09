@@ -15,7 +15,7 @@ import {
   Target,
   FileText,
   BarChart3,
-  UserPlus,
+
   MessageSquare,
   Info,
 } from "lucide-react"
@@ -35,7 +35,6 @@ export default function Navbar() {
     { name: "Goal", href: "/goal", icon: Target },
     { name: "Report", href: "/report", icon: FileText },
     { name: "Analytics", href: "/analytics", icon: BarChart3 },
-    { name: "Sign Up", href: "/sign-up", icon: UserPlus },
     { name: "Suggestion", href: "/suggestion", icon: MessageSquare },
     { name: "About Us", href: "/about", icon: Info },
   ]

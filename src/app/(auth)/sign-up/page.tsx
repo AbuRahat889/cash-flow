@@ -31,7 +31,7 @@ export default function Page() {
         authProvider: "manual"
       })
       console.log(res)
-      router.push("/auth/login")
+      router.push("/login")
     } catch (error) {
       console.log(error)
 

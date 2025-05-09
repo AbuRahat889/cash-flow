@@ -11,6 +11,7 @@ import { FcGoogle } from "react-icons/fc"
 
 export default function Page() {
     const router = useRouter()
+
     const {
         register,
         handleSubmit,
@@ -21,9 +22,16 @@ export default function Page() {
     const [loginUserFN] = useLoginuserMutation()
     const onSubmit = async (data: any) => {
         const res = await loginUserFN({ username: data.username, password: data.password })
-        router.push("/")
-        console.log(res)
+        // Save token in cookies
+        // Cookies.set("accessToken", res?.data?.token);
+        localStorage.setItem('token', res?.data?.token)
+        localStorage.setItem('user', data?.username)
+
+        // Dispatch user data to Redux store
+
+        console.log(res?.data?.token)
         console.log(data)
+        router.push("/")
         // Handle form submission
     }
 
@@ -52,7 +60,7 @@ export default function Page() {
                             {errors.amount && typeof errors.amount.message === 'string' && <span className="text-red-200 text-sm mt-1">{errors.amount.message}</span>}
                         </div>
 
-                         <div className="relative">
+                        {/* <div className="relative">
                             <input
                                 {...register("lastName", { required: "Last Name is required" })}
                                 type="text"
@@ -63,10 +71,10 @@ export default function Page() {
                                 <Wallet size={20} />
                             </div>
                             {errors.amount && typeof errors.amount.message === 'string' && <span className="text-red-200 text-sm mt-1">{errors.amount.message}</span>}
-                        </div> 
+                        </div> */}
 
                         {/* Amount Input */}
-                        <div className="relative">
+                        {/* <div className="relative">
                             <input
                                 {...register("email", { required: "Email is required" })}
                                 type="email"
@@ -78,7 +86,7 @@ export default function Page() {
                                 <Wallet size={20} />
                             </div>
                             {errors.amount && typeof errors.amount.message === 'string' && <span className="text-red-200 text-sm mt-1">{errors.amount.message}</span>}
-                        </div> 
+                        </div> */}
 
                         <div className="relative">
                             <input
@@ -104,7 +112,7 @@ export default function Page() {
                             type="submit"
                             className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            Sing Up
+                            Login
                         </button>
                     </div>
                 </form>

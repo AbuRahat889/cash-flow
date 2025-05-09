@@ -1,12 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client'
+
+
 import React from 'react'
 
 import Header from '@/components/Header'
 import { FaBangladeshiTakaSign } from 'react-icons/fa6'
 import increment from '@/assets/increase-removebg-preview 1.svg'
 import Image from 'next/image'
+import { useGetExpencesQuery } from '@/redux/api/expence'
 
 
-export default function page() {
+export default function Page() {
+
+  const { data } = useGetExpencesQuery('')
+
   return (
     <div className='bg-[#A85CF9] w-screen p-10 container mx-auto' >
       <Header />
@@ -43,7 +51,7 @@ export default function page() {
           {/* Table */}
           <div className="w-full">
             {/* Table header */}
-            <div className="grid grid-cols-4 px-6 py-3 text-white border-t border-white/20">
+            <div className="grid grid-cols-5 px-6 py-3 text-white border-t border-white/20">
               <div className="font-medium">Name</div>
               <div className="font-medium">Status</div>
               <div className="font-medium">Date</div>
@@ -51,16 +59,22 @@ export default function page() {
             </div>
 
             {/* Table row */}
-            <div className="grid grid-cols-4 px-6 py-4 text-white border-t border-white/20">
-              <div>Rahat</div>
-              <div>
-                <span className="flex items-center">
-                  <span className="mr-1">🍔</span> Food
-                </span>
-              </div>
-              <div>01/06/2023</div>
-              <div className="text-right">500</div>
-            </div>
+
+            {
+              data?.map((item: any, index: number) => (
+                <div key={item._id} className="grid grid-cols-5 px-6 py-4 text-white border-t border-white/20">
+                  <div>{index + 1}</div>
+                  <div>{item.category}</div>
+                  <div>
+                    <span className="flex items-center line-clamp-1">
+                      {item.description}
+                    </span>
+                  </div>
+
+                  <div className="text-right">{item.amount}</div>
+                </div>
+              ))
+            }
           </div>
         </div>
       </div>
