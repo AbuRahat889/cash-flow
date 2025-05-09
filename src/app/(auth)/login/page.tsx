@@ -52,7 +52,7 @@ export default function Page() {
                             {errors.amount && typeof errors.amount.message === 'string' && <span className="text-red-200 text-sm mt-1">{errors.amount.message}</span>}
                         </div>
 
-                        {/* <div className="relative">
+                         <div className="relative">
                             <input
                                 {...register("lastName", { required: "Last Name is required" })}
                                 type="text"
@@ -63,10 +63,10 @@ export default function Page() {
                                 <Wallet size={20} />
                             </div>
                             {errors.amount && typeof errors.amount.message === 'string' && <span className="text-red-200 text-sm mt-1">{errors.amount.message}</span>}
-                        </div> */}
+                        </div> 
 
                         {/* Amount Input */}
-                        {/* <div className="relative">
+                        <div className="relative">
                             <input
                                 {...register("email", { required: "Email is required" })}
                                 type="email"
@@ -78,7 +78,7 @@ export default function Page() {
                                 <Wallet size={20} />
                             </div>
                             {errors.amount && typeof errors.amount.message === 'string' && <span className="text-red-200 text-sm mt-1">{errors.amount.message}</span>}
-                        </div> */}
+                        </div> 
 
                         <div className="relative">
                             <input
